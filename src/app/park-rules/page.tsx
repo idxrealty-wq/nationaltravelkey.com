@@ -208,12 +208,19 @@ function EagleScene() {
     setStarted(true);
     sounds.sonar();
     setTimeout(() => { setPhase(1); sounds.eagle(); }, 600);
-    setTimeout(() => { setPhase(2); sounds.clank(); }, 2400);
-    setTimeout(() => setPhase(3), 4000);
+    setTimeout(() => setPhase(2), 2800);
+    setTimeout(() => { setPhase(3); sounds.clank(); }, 4200);
+    setTimeout(() => setPhase(4), 5800);
   }, []);
 
   return (
     <section ref={ref} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-4 py-20">
+      {/* Radial glow */}
+      <div className={`absolute inset-0 z-0 transition-opacity duration-[3000ms] ${phase >= 1 ? "opacity-100" : "opacity-0"}`}>
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(8,47,73,0.4), black)" }} />
+      </div>
+
+      {/* ENTER button */}
       {!started && v && (
         <div className="relative z-30 flex flex-col items-center gap-8">
           <p className="text-green-400 font-mono text-xs tracking-[0.4em] animate-pulse">
@@ -229,59 +236,87 @@ function EagleScene() {
           <p className="text-gray-600 text-xs">TAP TO BEGIN</p>
         </div>
       )}
+
       {started && (
         <>
-          <div className="absolute inset-0 z-0">
-            <div className={`absolute inset-0 bg-gradient-radial from-sky-950/40 via-black to-black transition-opacity duration-[3000ms] ${phase >= 1 ? "opacity-100" : "opacity-0"}`} />
-          </div>
+          {/* EAGLE — flies in from left as standalone character */}
           <div
-            className={`absolute inset-0 z-10 transition-all duration-[2500ms] ease-out ${phase >= 1 ? "translate-x-0 opacity-100" : "-translate-x-[110vw] opacity-0"}`}
-            style={{ mixBlendMode: "screen" }}
+            className="absolute z-10"
+            style={{
+              width: "clamp(200px, 50vw, 480px)",
+              top: "50%",
+              left: "50%",
+              transition: "transform 2200ms cubic-bezier(0.22, 1, 0.36, 1), opacity 800ms ease",
+              transform: phase >= 2
+                ? "translate(-50%, -60%) rotate(0deg) scale(1)"
+                : phase >= 1
+                  ? "translate(-50%, -58%) rotate(-4deg) scale(1.05)"
+                  : "translate(-160%, -40%) rotate(-18deg) scale(0.65)",
+              opacity: phase >= 1 ? 1 : 0,
+            }}
           >
             <img
               src={EAGLE}
-              alt="Bald eagle"
-              className="w-full h-full object-cover object-center opacity-60"
-              style={{ filter: "contrast(1.3) brightness(0.9)" }}
+              alt="Bald eagle delivering park rules over Florida"
+              className="w-full h-auto"
+              style={{ filter: "drop-shadow(0 0 40px rgba(255,255,255,0.2)) contrast(1.3) brightness(0.95)" }}
             />
           </div>
+
+          {/* FLAGS — drop from top after eagle lands */}
           <div className="absolute top-0 left-0 right-0 flex justify-between px-6 pt-6 z-20">
             <img
               src={FL}
               alt="Florida flag"
-              className={`w-32 md:w-48 rounded-lg shadow-2xl transition-all duration-1000 delay-[2000ms] ${phase >= 2 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
-              style={{ filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))" }}
+              className="w-28 md:w-44 rounded-lg shadow-2xl"
+              style={{
+                filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))",
+                opacity: phase >= 3 ? 1 : 0,
+                transform: phase >= 3 ? "translateY(0)" : "translateY(-60px)",
+                transition: "opacity 1000ms ease, transform 1000ms ease",
+                transitionDelay: "0ms",
+              }}
             />
             <img
               src={USA}
               alt="American flag"
-              className={`w-32 md:w-48 rounded-lg shadow-2xl transition-all duration-1000 delay-[2200ms] ${phase >= 2 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
-              style={{ filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))" }}
+              className="w-28 md:w-44 rounded-lg shadow-2xl"
+              style={{
+                filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))",
+                opacity: phase >= 3 ? 1 : 0,
+                transform: phase >= 3 ? "translateY(0)" : "translateY(-60px)",
+                transition: "opacity 1000ms ease, transform 1000ms ease",
+                transitionDelay: "200ms",
+              }}
             />
           </div>
-          <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
-            <div className={`transition-all duration-500 ${phase >= 2 ? "opacity-100" : "opacity-0"}`}>
+
+          {/* TEXT — types in after flags */}
+          <div className="relative z-20 text-center max-w-4xl mx-auto px-4 mt-[52vh]">
+            <div style={{ opacity: phase >= 3 ? 1 : 0, transition: "opacity 500ms ease" }}>
               <p className="text-green-400 text-xs tracking-[0.4em] mb-4 font-mono">
-                <MetalText text="// ORANGE COUNTY PARKS DIVISION //" trigger={phase >= 2} speed={40} />
+                <MetalText text="// ORANGE COUNTY PARKS DIVISION //" trigger={phase >= 3} speed={40} />
               </p>
             </div>
-            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-white leading-none mb-6"
-              style={{ textShadow: "0 0 40px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.8)" }}>
-              {phase >= 2 && (
-                <MetalText text="PARK RULES" trigger={phase >= 2} speed={80} className="block" />
+            <h1
+              className="text-4xl md:text-7xl font-black tracking-tight text-white leading-none mb-6"
+              style={{ textShadow: "0 0 40px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.8)" }}
+            >
+              {phase >= 3 && (
+                <MetalText text="PARK RULES" trigger={phase >= 3} speed={80} className="block" />
               )}
             </h1>
-            <div className={`transition-all duration-700 delay-[1000ms] ${phase >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+            <div style={{ opacity: phase >= 4 ? 1 : 0, transform: phase >= 4 ? "translateY(0)" : "translateY(16px)", transition: "opacity 700ms ease 1000ms, transform 700ms ease 1000ms" }}>
               <p className="text-sky-300 text-base md:text-xl italic font-light">
                 Delivered from 30,000 feet. No desktop required.
               </p>
             </div>
-            <div className={`mt-8 transition-all duration-700 delay-[1500ms] ${phase >= 3 ? "opacity-100" : "opacity-0"}`}>
+            <div style={{ opacity: phase >= 4 ? 1 : 0, transition: "opacity 700ms ease 1500ms" }} className="mt-8">
               <div className="inline-block border border-green-700/50 bg-green-950/30 rounded-xl px-6 py-3">
                 <p className="text-green-400 font-mono text-sm">📜 TRANSMISSION RECEIVED — SCROLL TO DECODE</p>
               </div>
             </div>
-            <div className={`mt-6 transition-all duration-500 delay-[2000ms] ${phase >= 3 ? "opacity-100" : "opacity-0"}`}>
+            <div style={{ opacity: phase >= 4 ? 1 : 0, transition: "opacity 500ms ease 2000ms" }} className="mt-6">
               <p className="text-sky-700 text-xs animate-bounce">↓</p>
             </div>
           </div>
