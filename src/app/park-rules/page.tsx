@@ -268,5 +268,3 @@ export default function ParkRulesPage() {
   );
 }
 
-  return (
-    <main className="min-h-screen bg-black text-white">
