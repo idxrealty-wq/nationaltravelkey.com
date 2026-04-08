@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const EAGLE_IMG = "https://us.chat-img.sintra.ai/f3b53c23-1962-4de9-bee1-1ab563b224f9/1c86eb82-f41e-496a-aba9-b013f6c2f1b9/image.png";
-const RACCOONS_IMG = "https://us.chat-img.sintra.ai/f3b53c23-1962-4de9-bee1-1ab563b224f9/844cdffd-6646-4a92-bd27-0fcb7728db6a/image.png";
-const OWL_IMG = "https://us.chat-img.sintra.ai/f3b53c23-1962-4de9-bee1-1ab563b224f9/3fd56b96-ad2b-46a3-a7a2-6789e33a8937/image.png";
+const EAGLE_IMG = "/images/eagle.png";
+const RACCOONS_IMG = "/images/raccoons.png";
+const OWL_IMG = "/images/owl.png";
 
 type RuleItem = {
   title: string;
