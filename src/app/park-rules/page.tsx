@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 
-const EAGLE = "/images/eagle-side.png";
+const EAGLE = "/images/eagle-new.png";
 const OWL = "/images/owl.png";
 const RACCOONS = "/images/raccoons.png";
 const USA = "/images/flag-usa.png";
@@ -75,7 +75,6 @@ const tips: Rule[] = [
     reaction: "🤷",
   },
 ];
-
 function useVis(ref: React.RefObject<HTMLElement | null>, threshold = 0.1) {
   const [v, setV] = useState(false);
   useEffect(() => {
@@ -177,7 +176,10 @@ const sounds = {
     } catch {}
   },
 };
-function MetalText({ text, trigger, speed = 60, className = "" }: { text: string; trigger: boolean; speed?: number; className?: string }) {
+
+function MetalText({ text, trigger, speed = 60, className = "" }: {
+  text: string; trigger: boolean; speed?: number; className?: string;
+}) {
   const displayed = useMetalType(text, trigger, speed);
   const lastRef = useRef(0);
   useEffect(() => {
@@ -199,75 +201,92 @@ function MetalText({ text, trigger, speed = 60, className = "" }: { text: string
 function EagleScene() {
   const ref = useRef<HTMLDivElement>(null);
   const v = useVis(ref);
+  const [started, setStarted] = useState(false);
   const [phase, setPhase] = useState(0);
 
-  useEffect(() => {
-    if (!v) return;
+  const handleEnter = useCallback(() => {
+    setStarted(true);
     sounds.sonar();
-    const t1 = setTimeout(() => { setPhase(1); sounds.eagle(); }, 600);
-    const t2 = setTimeout(() => setPhase(2), 2400);
-    const t3 = setTimeout(() => setPhase(3), 4000);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [v]);
+    setTimeout(() => { setPhase(1); sounds.eagle(); }, 600);
+    setTimeout(() => { setPhase(2); sounds.clank(); }, 2400);
+    setTimeout(() => setPhase(3), 4000);
+  }, []);
 
   return (
     <section ref={ref} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-4 py-20">
-      <div className="absolute inset-0 z-0">
-        <div className={`absolute inset-0 bg-gradient-radial from-sky-950/40 via-black to-black transition-opacity duration-[3000ms] ${phase >= 1 ? "opacity-100" : "opacity-0"}`} />
-      </div>
-      <div
-        className={`absolute inset-0 z-10 transition-all duration-[2500ms] ease-out ${phase >= 1 ? "translate-x-0 opacity-100" : "-translate-x-[110vw] opacity-0"}`}
-        style={{ mixBlendMode: "screen" }}
-      >
-        <img
-          src={EAGLE}
-          alt="Bald eagle"
-          className="w-full h-full object-cover object-center opacity-60"
-          style={{ filter: "contrast(1.3) brightness(0.9)" }}
-        />
-      </div>
-      <div className="absolute top-0 left-0 right-0 flex justify-between px-6 pt-6 z-20">
-        <img
-          src={FL}
-          alt="Florida flag"
-          className={`w-32 md:w-48 rounded-lg shadow-2xl transition-all duration-1000 delay-[2000ms] ${phase >= 2 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
-          style={{ filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))" }}
-        />
-        <img
-          src={USA}
-          alt="American flag"
-          className={`w-32 md:w-48 rounded-lg shadow-2xl transition-all duration-1000 delay-[2200ms] ${phase >= 2 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
-          style={{ filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))" }}
-        />
-      </div>
-      <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
-        <div className={`transition-all duration-500 ${phase >= 2 ? "opacity-100" : "opacity-0"}`}>
-          <p className="text-green-400 text-xs tracking-[0.4em] mb-4 font-mono">
-            <MetalText text="// ORANGE COUNTY PARKS DIVISION //" trigger={phase >= 2} speed={40} />
+      {!started && v && (
+        <div className="relative z-30 flex flex-col items-center gap-8">
+          <p className="text-green-400 font-mono text-xs tracking-[0.4em] animate-pulse">
+            // CLASSIFIED — ORANGE COUNTY PARKS DIVISION //
           </p>
+          <button
+            onClick={handleEnter}
+            className="px-10 py-5 bg-green-900/40 border-2 border-green-500 rounded-2xl text-green-400 font-mono font-black text-xl md:text-3xl tracking-widest hover:bg-green-800/50 hover:scale-105 active:scale-95 transition-all duration-300 animate-pulse"
+            style={{ boxShadow: "0 0 40px rgba(34,197,94,0.3), inset 0 0 20px rgba(34,197,94,0.1)" }}
+          >
+            ▶ ENTER BRIEFING
+          </button>
+          <p className="text-gray-600 text-xs">TAP TO BEGIN</p>
         </div>
-        <h1 className="text-4xl md:text-7xl font-black tracking-tight text-white leading-none mb-6"
-          style={{ textShadow: "0 0 40px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.8)" }}>
-          {phase >= 2 && (
-            <MetalText text="PARK RULES" trigger={phase >= 2} speed={80} className="block" />
-          )}
-        </h1>
-        <div className={`transition-all duration-700 delay-[1000ms] ${phase >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-          <p className="text-sky-300 text-base md:text-xl italic font-light">
-            Delivered from 30,000 feet. No desktop required.
-          </p>
-        </div>
-        <div className={`mt-8 transition-all duration-700 delay-[1500ms] ${phase >= 3 ? "opacity-100" : "opacity-0"}`}>
-          <div className="inline-block border border-green-700/50 bg-green-950/30 rounded-xl px-6 py-3">
-            <p className="text-green-400 font-mono text-sm">
-              📜 TRANSMISSION RECEIVED — SCROLL TO DECODE
-            </p>
+      )}
+      {started && (
+        <>
+          <div className="absolute inset-0 z-0">
+            <div className={`absolute inset-0 bg-gradient-radial from-sky-950/40 via-black to-black transition-opacity duration-[3000ms] ${phase >= 1 ? "opacity-100" : "opacity-0"}`} />
           </div>
-        </div>
-        <div className={`mt-6 transition-all duration-500 delay-[2000ms] ${phase >= 3 ? "opacity-100" : "opacity-0"}`}>
-          <p className="text-sky-700 text-xs animate-bounce">↓</p>
-        </div>
-      </div>
+          <div
+            className={`absolute inset-0 z-10 transition-all duration-[2500ms] ease-out ${phase >= 1 ? "translate-x-0 opacity-100" : "-translate-x-[110vw] opacity-0"}`}
+            style={{ mixBlendMode: "screen" }}
+          >
+            <img
+              src={EAGLE}
+              alt="Bald eagle"
+              className="w-full h-full object-cover object-center opacity-60"
+              style={{ filter: "contrast(1.3) brightness(0.9)" }}
+            />
+          </div>
+          <div className="absolute top-0 left-0 right-0 flex justify-between px-6 pt-6 z-20">
+            <img
+              src={FL}
+              alt="Florida flag"
+              className={`w-32 md:w-48 rounded-lg shadow-2xl transition-all duration-1000 delay-[2000ms] ${phase >= 2 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
+              style={{ filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))" }}
+            />
+            <img
+              src={USA}
+              alt="American flag"
+              className={`w-32 md:w-48 rounded-lg shadow-2xl transition-all duration-1000 delay-[2200ms] ${phase >= 2 ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}
+              style={{ filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))" }}
+            />
+          </div>
+          <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
+            <div className={`transition-all duration-500 ${phase >= 2 ? "opacity-100" : "opacity-0"}`}>
+              <p className="text-green-400 text-xs tracking-[0.4em] mb-4 font-mono">
+                <MetalText text="// ORANGE COUNTY PARKS DIVISION //" trigger={phase >= 2} speed={40} />
+              </p>
+            </div>
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-white leading-none mb-6"
+              style={{ textShadow: "0 0 40px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.8)" }}>
+              {phase >= 2 && (
+                <MetalText text="PARK RULES" trigger={phase >= 2} speed={80} className="block" />
+              )}
+            </h1>
+            <div className={`transition-all duration-700 delay-[1000ms] ${phase >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+              <p className="text-sky-300 text-base md:text-xl italic font-light">
+                Delivered from 30,000 feet. No desktop required.
+              </p>
+            </div>
+            <div className={`mt-8 transition-all duration-700 delay-[1500ms] ${phase >= 3 ? "opacity-100" : "opacity-0"}`}>
+              <div className="inline-block border border-green-700/50 bg-green-950/30 rounded-xl px-6 py-3">
+                <p className="text-green-400 font-mono text-sm">📜 TRANSMISSION RECEIVED — SCROLL TO DECODE</p>
+              </div>
+            </div>
+            <div className={`mt-6 transition-all duration-500 delay-[2000ms] ${phase >= 3 ? "opacity-100" : "opacity-0"}`}>
+              <p className="text-sky-700 text-xs animate-bounce">↓</p>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }
