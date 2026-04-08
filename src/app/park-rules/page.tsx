@@ -542,7 +542,7 @@ export default function ParkRulesPage() {
             <div className="mt-8 flex justify-center gap-3">
               {[0, 1, 2, 3].map((s) => (
                 <div key={s} className="flex flex-col items-center gap-1">
-                  <div className={`h-3 w-3 rounded-full transition-all duration-700 \${
+                  <div className={`h-3 w-3 rounded-full transition-all duration-700 ${
                     scene >= s ? "bg-amber-400 scale-125 shadow-[0_0_12px_rgba(251,191,36,0.8)]" : "bg-white/20"
                   }`} />
                   <span className={`text-xs font-bold transition-all duration-500 ${scene >= s ? "text-amber-300" : "text-white/30"}`}>
@@ -570,8 +570,7 @@ export default function ParkRulesPage() {
             )}
           </div>
 
-          {/* Scene label */
-		            {/* Scene label */}
+          {/* Scene label */}
           <div className="mt-4 text-center">
             <p className="text-sm font-black uppercase tracking-widest text-amber-300 drop-shadow-lg">
               {sceneLabels[scene]}
