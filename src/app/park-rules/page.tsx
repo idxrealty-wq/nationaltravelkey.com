@@ -330,6 +330,7 @@ function OwlCatch() {
   const ref = useRef<HTMLDivElement>(null);
   const v = useVis(ref);
   const [caught, setCaught] = useState(false);
+
   useEffect(() => {
     if (v) {
       sounds.sonar();
@@ -337,19 +338,20 @@ function OwlCatch() {
       return () => clearTimeout(t);
     }
   }, [v]);
+
   return (
-    <section ref={ref} className="relative bg-gradient-to-b from-black via-sky-950 to-gray-950 px-4 py-20 overflow-hidden">
+    <section ref={ref} className="relative bg-gradient-to-b from-black via-sky-950 to-gray-950 px-4 py-10 md:py-12 overflow-hidden">
       <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
-        <div className={`transition-all duration-700 text-5xl mb-4 ${v ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16"}`}>
+        <div className={`transition-all duration-700 text-5xl mb-2 ${v ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-16"}`}>
           📜
         </div>
         <img
           src={OWL}
           alt="Wise owl"
-          className={`w-48 md:w-64 drop-shadow-2xl transition-all duration-500 ${caught ? "scale-110 -rotate-2" : "scale-100"} ${v ? "opacity-100" : "opacity-0"}`}
+          className={`w-64 md:w-[21rem] drop-shadow-2xl transition-all duration-500 ${caught ? "scale-110 -rotate-2" : "scale-100"} ${v ? "opacity-100" : "opacity-0"}`}
           style={{ filter: "drop-shadow(0 0 30px rgba(100,150,255,0.4))" }}
         />
-        <div className={`mt-6 transition-all duration-700 delay-700 ${caught ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <div className={`mt-4 transition-all duration-700 delay-700 ${caught ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <p className="text-green-400 font-mono text-xs tracking-widest mb-2">// RULES RECEIVED //</p>
           <p className="text-gray-300 italic text-base md:text-lg">
             &ldquo;I don&rsquo;t make them. I just unfold them.&rdquo;
@@ -386,6 +388,7 @@ function RaccoonGuards({ reaction, vis }: { reaction: string; vis: boolean }) {
 
 function AutoCard({ r, vis, dir }: { r: Rule; vis: boolean; dir: "left" | "right" }) {
   const played = useRef(false);
+
   useEffect(() => {
     if (vis && !played.current) {
       played.current = true;
@@ -393,12 +396,51 @@ function AutoCard({ r, vis, dir }: { r: Rule; vis: boolean; dir: "left" | "right
       setTimeout(() => sounds.clank(), 300);
     }
   }, [vis]);
+
   const slide = dir === "left" ? "-translate-x-20" : "translate-x-20";
+
+  const renderDetail = (text: string) => {
+    if (r.t !== "CANCELLATIONS & CHANGES") {
+      return text;
+    }
+
+    return (
+      <span>
+        Kelly:{" "}
+        <a href="mailto:KellyCamping@ocfl.net" className="underline underline-offset-4 hover:text-white">
+          KellyCamping@ocfl.net
+        </a>
+        {" | "}
+        Clarcona:{" "}
+        <a href="tel:+14072549010" className="underline underline-offset-4 hover:text-white">
+          (407) 254-9010
+        </a>
+        {" | "}
+        Moss:{" "}
+        <a href="tel:+14072546840" className="underline underline-offset-4 hover:text-white">
+          (407) 254-6840
+        </a>
+        {" | "}
+        Magnolia:{" "}
+        <a href="tel:+14072549046" className="underline underline-offset-4 hover:text-white">
+          (407) 254-9046
+        </a>
+        {" | "}
+        Trimble:{" "}
+        <a href="tel:+14072541982" className="underline underline-offset-4 hover:text-white">
+          (407) 254-1982
+        </a>
+      </span>
+    );
+  };
+
   return (
     <div className={`transition-all duration-700 ${vis ? "opacity-100 translate-x-0 translate-y-0 scale-100" : `opacity-0 ${slide} translate-y-6 scale-95`}`}>
       <RaccoonGuards reaction={r.reaction} vis={vis} />
-      <div className={`bg-gradient-to-br ${r.c} border ${r.b} rounded-2xl p-5 md:p-7`}
-        style={{ boxShadow: vis ? "0 0 30px rgba(0,0,0,0.5)" : "none" }}>
+      <div
+        className={`bg-gradient-to-br ${r.c} border ${r.b} rounded-2xl p-5 md:p-7`}
+        style={{ boxShadow: vis ? "0 0 30px rgba(0,0,0,0.5)" : "none" }}
+      >
         <div className="flex items-start gap-4">
           <span className="text-3xl md:text-4xl mt-1">{r.e}</span>
           <div className="flex-1">
@@ -408,8 +450,8 @@ function AutoCard({ r, vis, dir }: { r: Rule; vis: boolean; dir: "left" | "right
             <p className="text-gray-300 text-sm md:text-base mt-2 leading-relaxed">
               {r.w}
             </p>
-            <p className="text-gray-400 text-sm mt-2 leading-relaxed">
-              {r.d}
+            <p className="text-gray-400 text-sm mt-2 leading-relaxed break-words">
+              {renderDetail(r.d)}
             </p>
             {r.p && (
               <p className={`text-xs md:text-sm mt-3 font-semibold ${r.a}`}>
