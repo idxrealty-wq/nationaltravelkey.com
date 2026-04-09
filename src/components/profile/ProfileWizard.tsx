@@ -1,6 +1,15 @@
 "use client";
 
-import { useState, useCallback } from "react";
+// ============================================
+// NTK Profile Wizard (Firebase-connected)
+// Path: src/components/profile/ProfileWizard.tsx
+// Status: ACTIVE | Last Updated: 2026-04-09
+// ============================================
+
+import { useState, useCallback, useEffect } from "react";
+import { useAuth } from "../auth/AuthProvider";
+import { getProfile, updateProfile, createProfile } from "../../lib/firebase/profiles";
+import { Timestamp } from "firebase/firestore";
 import ProgressBar from "./ProgressBar";
 import StepPersonalInfo from "./StepPersonalInfo";
 import StepContactEmergency from "./StepContactEmergency";
@@ -85,9 +94,93 @@ const INITIAL_DATA: ProfileData = {
 };
 
 export default function ProfileWizard() {
+  const { user } = useAuth();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<ProfileData>(INITIAL_DATA);
   const [saved, setSaved] = useState(false);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  // Load profile from Firestore on mount
+  useEffect(() => {
+    if (!user) {
+      setLoadingProfile(false);
+      return;
+    }
+    (async () => {
+      try {
+        const profile = await getProfile(user.uid);
+        if (profile) {
+          setData({
+            fullName: profile.fullName || "",
+            dateOfBirth: profile.dateOfBirth
+              ? profile.dateOfBirth.toDate().toISOString().split("T")[0]
+              : "",
+            phone: profile.phoneNumber || "",
+            email: profile.email || "",
+            primaryPhone: profile.phoneNumber || "",
+            secondaryPhone: profile.secondaryPhone || "",
+            emergencyName: profile.emergencyContactName || "",
+            emergencyPhone: profile.emergencyContactPhone || "",
+            emergencyRelationship: "",
+            preferredContact: profile.preferredContactMethod || "",
+            bedType: profile.bedTypePreference || "",
+            adultsCount: String(profile.occupancyAdults ?? 1),
+            childrenCount: String(profile.occupancyChildren ?? 0),
+            infantsCount: String(profile.occupancyInfants ?? 0),
+            petType: profile.petType || "",
+            petSize: profile.petSize || "",
+            petCount: profile.petCount ? String(profile.petCount) : "",
+            accessibilityNeeds: profile.accessibilityNeeds || [],
+            smokingPref: profile.smokingPreference || "",
+            floorPref: profile.floorPreference || "",
+            roomLocation: profile.roomLocationPreference || "",
+            rvType: profile.rvType || "",
+            rvLength: profile.rvLength || "",
+            hookupReq: profile.hookupRequirements || "",
+            tentPref: "",
+            waterfrontPref: profile.waterfrontPreference ? "yes" : "",
+            shadePref: profile.shadePreference ? "yes" : "",
+            petFriendlyReq: profile.petFriendlyRequired ? "yes" : "",
+            campAccessibility: [],
+            primaryPayment: profile.primaryPaymentMethod || "",
+            backupPayment: profile.backupPaymentMethod || "",
+            checkinPayment: profile.preferredCheckInPayment || "",
+            billingStreet: profile.billingAddress?.street || "",
+            billingCity: profile.billingAddress?.city || "",
+            billingState: profile.billingAddress?.state || "",
+            billingZip: profile.billingAddress?.zip || "",
+            dietaryRestrictions: profile.dietaryRestrictions || [],
+            customDietary: "",
+            mobilityNeeds: "",
+            serviceAnimalType: profile.serviceAnimalInfo || "",
+            serviceAnimalTask: "",
+            languagePref: profile.languagePreference || "en",
+            additionalAccommodations: "",
+            membershipTier: profile.membershipTier || "standard",
+            loyaltyPrograms: profile.loyaltyProgramNumbers
+              ? Object.keys(profile.loyaltyProgramNumbers)
+              : [],
+            customLoyalty: "",
+            commPref: "",
+            marketingOptIn: profile.marketingOptIn ? "yes" : "",
+            publicProfile: "",
+            supplierVisibility: profile.supplierVisibleFields || [
+              "name", "contact", "occupancy", "bed-pref", "rv-details",
+              "hookup", "pet-info", "accessibility", "payment",
+            ],
+            photoVisibility: profile.facePhotoVisibility || "",
+            identityVerification: "",
+            dataSharingConsent: profile.dataSharingConsent ? "yes" : "",
+          });
+        }
+      } catch (err) {
+        console.error("Failed to load profile:", err);
+      } finally {
+        setLoadingProfile(false);
+      }
+    })();
+  }, [user]);
 
   const handleChange = useCallback((field: string, value: string | string[]) => {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -107,9 +200,74 @@ export default function ProfileWizard() {
     }
   };
 
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+  // Save to Firestore
+  const handleSave = async () => {
+    if (!user) return;
+    setSaving(true);
+    try {
+      const firestoreData: Record<string, unknown> = {
+        userId: user.uid,
+        fullName: data.fullName,
+        dateOfBirth: data.dateOfBirth
+          ? Timestamp.fromDate(new Date(data.dateOfBirth as string))
+          : null,
+        phoneNumber: data.phone || data.primaryPhone,
+        secondaryPhone: data.secondaryPhone,
+        email: data.email || user.email || "",
+        preferredContactMethod: data.preferredContact,
+        emergencyContactName: data.emergencyName,
+        emergencyContactPhone: data.emergencyPhone,
+        bedTypePreference: data.bedType,
+        occupancyAdults: parseInt(data.adultsCount as string) || 1,
+        occupancyChildren: parseInt(data.childrenCount as string) || 0,
+        occupancyInfants: parseInt(data.infantsCount as string) || 0,
+        petType: data.petType || null,
+        petSize: data.petSize || null,
+        petCount: parseInt(data.petCount as string) || 0,
+        accessibilityNeeds: data.accessibilityNeeds,
+        smokingPreference: data.smokingPref,
+        floorPreference: data.floorPref,
+        roomLocationPreference: data.roomLocation,
+        rvType: data.rvType,
+        rvLength: data.rvLength || null,
+        hookupRequirements: data.hookupReq,
+        waterfrontPreference: data.waterfrontPref === "yes",
+        shadePreference: data.shadePref === "yes",
+        petFriendlyRequired: data.petFriendlyReq === "yes",
+        primaryPaymentMethod: data.primaryPayment,
+        backupPaymentMethod: data.backupPayment || null,
+        preferredCheckInPayment: data.checkinPayment || null,
+        billingAddress: {
+          street: data.billingStreet,
+          city: data.billingCity,
+          state: data.billingState,
+          zip: data.billingZip,
+          country: "US",
+        },
+        dietaryRestrictions: data.dietaryRestrictions,
+        serviceAnimalInfo: data.serviceAnimalType || null,
+        languagePreference: data.languagePref,
+        membershipTier: data.membershipTier || "STANDARD",
+        marketingOptIn: data.marketingOptIn === "yes",
+        dataSharingConsent: data.dataSharingConsent === "yes",
+        supplierVisibleFields: data.supplierVisibility,
+        facePhotoVisibility: data.photoVisibility || "NONE",
+      };
+
+      const existing = await getProfile(user.uid);
+      if (existing) {
+        await updateProfile(user.uid, firestoreData as Parameters<typeof updateProfile>[1]);
+      } else {
+        await createProfile(user.uid, firestoreData as Parameters<typeof createProfile>[1]);
+      }
+
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (err) {
+      console.error("Failed to save profile:", err);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const renderStep = () => {
@@ -122,7 +280,7 @@ export default function ProfileWizard() {
               dateOfBirth: data.dateOfBirth as string,
               phone: data.phone as string,
               email: data.email as string,
-              }}
+            }}
             onChange={handleChange}
           />
         );
@@ -236,6 +394,20 @@ export default function ProfileWizard() {
     }
   };
 
+  // Loading state
+  if (loadingProfile) {
+    return (
+      <div className="min-h-screen bg-[#08152b] flex items-center justify-center">
+        <div className="text-center">
+          <div className="h-10 w-10 rounded-lg bg-[#c9a227] flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span className="text-[#08152b] font-black text-sm">NTK</span>
+          </div>
+          <p className="text-gray-400 text-sm">Loading your profile...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#08152b]">
       {/* Header */}
@@ -251,7 +423,7 @@ export default function ProfileWizard() {
             href="/"
             className="text-gray-400 hover:text-white text-sm font-medium transition"
           >
-            ← Back to Home
+            &larr; Back to Home
           </a>
         </div>
       </nav>
@@ -277,7 +449,7 @@ export default function ProfileWizard() {
                 : "border border-white/20 text-white hover:border-white/40"
             }`}
           >
-            ← Previous
+            &larr; Previous
           </button>
 
           <div className="flex items-center gap-3">
@@ -285,9 +457,10 @@ export default function ProfileWizard() {
             <button
               type="button"
               onClick={handleSave}
-              className="rounded-xl border border-[#c9a227]/30 px-5 py-3.5 text-[#c9a227] text-sm font-bold hover:bg-[#c9a227]/10 transition"
+              disabled={saving}
+              className="rounded-xl border border-[#c9a227]/30 px-5 py-3.5 text-[#c9a227] text-sm font-bold hover:bg-[#c9a227]/10 transition disabled:opacity-50"
             >
-              {saved ? "✓ Saved" : "Save Draft"}
+              {saving ? "Saving..." : saved ? "\u2713 Saved" : "Save Draft"}
             </button>
 
             {step < TOTAL_STEPS - 1 ? (
@@ -296,15 +469,16 @@ export default function ProfileWizard() {
                 onClick={next}
                 className="rounded-xl bg-[#c9a227] px-8 py-3.5 text-[#08152b] text-sm font-black hover:bg-[#d8b13a] transition"
               >
-                Next Step →
+                Next Step &rarr;
               </button>
             ) : (
               <button
                 type="button"
                 onClick={handleSave}
-                className="rounded-xl bg-emerald-600 px-8 py-3.5 text-white text-sm font-black hover:bg-emerald-500 transition"
+                disabled={saving}
+                className="rounded-xl bg-emerald-600 px-8 py-3.5 text-white text-sm font-black hover:bg-emerald-500 transition disabled:opacity-50"
               >
-                ✓ Complete Profile
+                {saving ? "Saving..." : "\u2713 Complete Profile"}
               </button>
             )}
           </div>
