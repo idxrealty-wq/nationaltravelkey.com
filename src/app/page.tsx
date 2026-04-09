@@ -1,4 +1,7 @@
-'use client';
+﻿'use client';
+
+import { useAuth } from "../components/auth/AuthProvider";
+import { signOut } from "../lib/firebase/auth";
 
 const countyTiles = [
   { name: 'Lake County', parks: 12, units: 28, openParks: 4, status: 'available' },
@@ -12,12 +15,12 @@ const countyTiles = [
 ];
 
 const availableParks = [
-  { name: 'Lake Griffin State Park', county: 'Lake County', types: 'Cabins, RV Sites', price: '$42–$118', left: 6 },
-  { name: 'Blue Spring State Park', county: 'Volusia County', types: 'Tent Sites, Cabins', price: '$28–$96', left: 4 },
-  { name: 'Wekiwa Springs State Park', county: 'Orange County', types: 'Tent Sites, RV Sites', price: '$24–$72', left: 3 },
-  { name: 'Silver Springs State Park', county: 'Marion County', types: 'Cabins, Full Hookup RV', price: '$36–$132', left: 8 },
-  { name: 'Moss Park', county: 'Orange County', types: 'Tent Sites, Primitive', price: '$22–$48', left: 5 },
-  { name: 'Kissimmee Prairie Preserve', county: 'Osceola County', types: 'Primitive, RV Sites', price: '$20–$64', left: 7 },
+  { name: 'Lake Griffin State Park', county: 'Lake County', types: 'Cabins, RV Sites', price: '$42â€“$118', left: 6 },
+  { name: 'Blue Spring State Park', county: 'Volusia County', types: 'Tent Sites, Cabins', price: '$28â€“$96', left: 4 },
+  { name: 'Wekiwa Springs State Park', county: 'Orange County', types: 'Tent Sites, RV Sites', price: '$24â€“$72', left: 3 },
+  { name: 'Silver Springs State Park', county: 'Marion County', types: 'Cabins, Full Hookup RV', price: '$36â€“$132', left: 8 },
+  { name: 'Moss Park', county: 'Orange County', types: 'Tent Sites, Primitive', price: '$22â€“$48', left: 5 },
+  { name: 'Kissimmee Prairie Preserve', county: 'Osceola County', types: 'Primitive, RV Sites', price: '$20â€“$64', left: 7 },
 ];
 
 const steps = [
@@ -25,7 +28,7 @@ const steps = [
     number: '01',
     title: 'Create your Travel Key profile',
     description:
-      'Enter your information once — name, vehicle details, emergency contacts, and preferences. Your profile is stored securely and ready to share instantly.',
+      'Enter your information once â€” name, vehicle details, emergency contacts, and preferences. Your profile is stored securely and ready to share instantly.',
   },
   {
     number: '02',
@@ -37,7 +40,7 @@ const steps = [
     number: '03',
     title: 'Find a park with openings',
     description:
-      'Drill into any county to see individual parks. Filter by site type — cabin, RV hookup, tent, or primitive. See pricing and units left before you drive.',
+      'Drill into any county to see individual parks. Filter by site type â€” cabin, RV hookup, tent, or primitive. See pricing and units left before you drive.',
   },
   {
     number: '04',
@@ -76,6 +79,12 @@ function getStatusClasses(status: string) {
 }
 
 export default function NationalTravelKeyHomePage() {
+  const { user, loading } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <main className="min-h-screen bg-[#08152b] text-white" style={{ fontFamily: 'system-ui, sans-serif' }}>
 
@@ -92,13 +101,35 @@ export default function NationalTravelKeyHomePage() {
             <a href="#county-grid" className="text-gray-400 hover:text-white text-sm font-medium transition">Search Parks</a>
             <a href="#how-it-works" className="text-gray-400 hover:text-white text-sm font-medium transition">How It Works</a>
             <a href="#available-now" className="text-gray-400 hover:text-white text-sm font-medium transition">Available Now</a>
+            {!loading && user && (
+              <a href="/profile" className="text-[#c9a227] hover:text-[#d8b13a] text-sm font-bold transition">My Profile</a>
+            )}
           </div>
-          <a
-            href="#county-grid"
-            className="rounded-xl bg-[#c9a227] px-5 py-2.5 text-[#08152b] font-black text-sm hover:bg-[#d8b13a] transition"
-          >
-            Search Florida Parks
-          </a>
+          {!loading && (
+            user ? (
+              <div className="flex items-center gap-4">
+                <a
+                  href="/profile"
+                  className="hidden sm:inline-flex rounded-xl bg-[#c9a227] px-5 py-2.5 text-[#08152b] font-black text-sm hover:bg-[#d8b13a] transition"
+                >
+                  My Profile
+                </a>
+                <button
+                  onClick={handleSignOut}
+                  className="rounded-xl border border-white/20 px-4 py-2.5 text-white text-sm font-bold hover:border-white/40 transition"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <a
+                href="/signin"
+                className="rounded-xl bg-[#c9a227] px-5 py-2.5 text-[#08152b] font-black text-sm hover:bg-[#d8b13a] transition"
+              >
+                Sign In
+              </a>
+            )
+          )}
         </div>
       </nav>
 
@@ -230,12 +261,12 @@ export default function NationalTravelKeyHomePage() {
                 <a
                   key={county.name}
                   href="#available-now"
-                  className={`rounded-3xl border ${status.border} ${status.bg} p-6 hover:-translate-y-1 transition block`}
+                  className={`rounded-3xl border \${status.border} \${status.bg} p-6 hover:-translate-y-1 transition block`}
                 >
                   <div className="flex items-center justify-between mb-5">
-                    <span className={`rounded-full px-3 py-1 text-xs font-bold ${status.badge}`}>{status.label}</span>
-                    <span className={`text-xs font-semibold ${status.text}`}>
-                      {county.status === 'full' ? 'FULL NOW' : `${county.openParks} OPEN`}
+                    <span className={`rounded-full px-3 py-1 text-xs font-bold \${status.badge}`}>{status.label}</span>
+                    <span className={`text-xs font-semibold \${status.text}`}>
+                      {county.status === 'full' ? 'FULL NOW' : `\${county.openParks} OPEN`}
                     </span>
                   </div>
                   <h3 className="text-2xl font-black text-white mb-2">{county.name}</h3>
@@ -251,7 +282,7 @@ export default function NationalTravelKeyHomePage() {
                     </div>
                   </div>
                   <div className="mt-5 text-sm font-semibold text-white">
-                    {county.status === 'full' ? 'View full county →' : 'See parks with availability →'}
+                    {county.status === 'full' ? 'View full county â†’' : 'See parks with availability â†’'}
                   </div>
                 </a>
               );
@@ -316,7 +347,7 @@ export default function NationalTravelKeyHomePage() {
             <p className="text-[#c9a227] text-xs font-bold uppercase tracking-[0.2em] mb-3">How It Works</p>
             <h2 className="text-3xl md:text-5xl font-black text-white mb-4">One profile. Every park.</h2>
             <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-              Set up your Travel Key once. Use it at every participating park in the network — no paperwork, no repeated forms.
+              Set up your Travel Key once. Use it at every participating park in the network â€” no paperwork, no repeated forms.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -367,10 +398,13 @@ export default function NationalTravelKeyHomePage() {
             </div>
             <span className="text-white font-black tracking-tight">National Travel Key</span>
           </div>
-          <p className="text-gray-500 text-sm">© 2026 National Travel Key. Florida Prototype.</p>
+          <p className="text-gray-500 text-sm">&copy; 2026 National Travel Key. Florida Prototype.</p>
           <div className="flex items-center gap-6">
             <a href="#county-grid" className="text-gray-500 hover:text-white text-sm transition">Search Parks</a>
             <a href="#how-it-works" className="text-gray-500 hover:text-white text-sm transition">How It Works</a>
+            {!loading && user && (
+              <a href="/profile" className="text-gray-500 hover:text-white text-sm transition">My Profile</a>
+            )}
           </div>
         </div>
       </footer>
