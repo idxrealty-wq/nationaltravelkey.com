@@ -23,7 +23,6 @@ const INITIAL_DATA: ProfileData = {
   dateOfBirth: "",
   phone: "",
   email: "",
-  pronouns: "",
   // Step 2 — Contact & Emergency
   primaryPhone: "",
   secondaryPhone: "",
@@ -123,8 +122,7 @@ export default function ProfileWizard() {
               dateOfBirth: data.dateOfBirth as string,
               phone: data.phone as string,
               email: data.email as string,
-              pronouns: data.pronouns as string,
-            }}
+              }}
             onChange={handleChange}
           />
         );
