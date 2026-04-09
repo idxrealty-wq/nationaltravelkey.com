@@ -607,6 +607,36 @@ function ClosingScene() {
 export default function ParkRulesPage() {
   return (
     <main className="min-h-screen bg-black text-white">
+      <section className="bg-black px-4 pt-8 pb-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-4 text-center">
+            <p className="text-green-400 font-mono text-xs tracking-[0.3em] mb-3">
+              // RULES VIDEO BRIEFING //
+            </p>
+            <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+              WATCH THE RULES FIRST
+            </h2>
+            <p className="text-gray-400 text-sm md:text-base mt-3">
+              No autoplay. Press play when you are ready.
+            </p>
+          </div>
+
+          <div className="relative w-full overflow-hidden rounded-2xl border border-gray-800 shadow-2xl bg-black">
+            <div className="relative w-full pt-[56.25%]">
+              <iframe
+                className="absolute inset-0 h-full w-full"
+                src="https://www.youtube.com/embed/UOhLtYY64ms"
+                title="Orange County Park Rules Video"
+                frameBorder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <EagleScene />
       <OwlCatch />
       <OwlScene />
