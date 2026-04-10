@@ -11,6 +11,7 @@ interface StepPersonalInfoProps {
     dateOfBirth: string;
     phone: string;
     email: string;
+	facePhotoUrl?: string;
   };
   onChange: (field: string, value: string) => void;
 }
@@ -18,7 +19,7 @@ interface StepPersonalInfoProps {
 export default function StepPersonalInfo({ data, onChange }: StepPersonalInfoProps) {
   const { user } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(data.facePhotoUrl || null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
 

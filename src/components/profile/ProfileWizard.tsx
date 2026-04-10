@@ -32,6 +32,7 @@ const INITIAL_DATA: ProfileData = {
   dateOfBirth: "",
   phone: "",
   email: "",
+  facePhotoUrl: "",
   // Step 2 — Contact & Emergency
   primaryPhone: "",
   secondaryPhone: "",
@@ -92,7 +93,6 @@ const INITIAL_DATA: ProfileData = {
   identityVerification: "",
   dataSharingConsent: "",
 };
-
 export default function ProfileWizard() {
   const { user } = useAuth();
   const [step, setStep] = useState(0);
@@ -118,6 +118,7 @@ export default function ProfileWizard() {
               : "",
             phone: profile.phoneNumber || "",
             email: profile.email || "",
+            facePhotoUrl: profile.facePhotoUrl || "",
             primaryPhone: profile.phoneNumber || "",
             secondaryPhone: profile.secondaryPhone || "",
             emergencyName: profile.emergencyContactName || "",
@@ -214,6 +215,7 @@ export default function ProfileWizard() {
         phoneNumber: data.phone || data.primaryPhone,
         secondaryPhone: data.secondaryPhone,
         email: data.email || user.email || "",
+        facePhotoUrl: data.facePhotoUrl || null,
         preferredContactMethod: data.preferredContact,
         emergencyContactName: data.emergencyName,
         emergencyContactPhone: data.emergencyPhone,
@@ -269,7 +271,6 @@ export default function ProfileWizard() {
       setSaving(false);
     }
   };
-
   const renderStep = () => {
     switch (step) {
       case 0:
@@ -280,6 +281,7 @@ export default function ProfileWizard() {
               dateOfBirth: data.dateOfBirth as string,
               phone: data.phone as string,
               email: data.email as string,
+              facePhotoUrl: data.facePhotoUrl as string,
             }}
             onChange={handleChange}
           />
@@ -394,7 +396,6 @@ export default function ProfileWizard() {
     }
   };
 
-  // Loading state
   if (loadingProfile) {
     return (
       <div className="min-h-screen bg-[#08152b] flex items-center justify-center">
@@ -410,7 +411,6 @@ export default function ProfileWizard() {
 
   return (
     <div className="min-h-screen bg-[#08152b]">
-      {/* Header */}
       <nav className="sticky top-0 z-50 border-b border-[#c9a227]/20 bg-[#08152b]/95 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
@@ -419,25 +419,19 @@ export default function ProfileWizard() {
             </div>
             <span className="text-white font-black text-lg tracking-tight">Travel Key Profile</span>
           </a>
-          <a
-            href="/"
-            className="text-gray-400 hover:text-white text-sm font-medium transition"
-          >
+          <a href="/" className="text-gray-400 hover:text-white text-sm font-medium transition">
             &larr; Back to Home
           </a>
         </div>
       </nav>
 
-      {/* Wizard body */}
       <div className="max-w-3xl mx-auto px-6 py-10">
         <ProgressBar currentStep={step} totalSteps={TOTAL_STEPS} />
 
-        {/* Step content */}
         <div className="rounded-3xl border border-white/10 bg-[#0d1f3c]/60 p-6 md:p-10">
           {renderStep()}
         </div>
 
-        {/* Navigation buttons */}
         <div className="flex items-center justify-between mt-8">
           <button
             type="button"
@@ -453,7 +447,6 @@ export default function ProfileWizard() {
           </button>
 
           <div className="flex items-center gap-3">
-            {/* Save draft */}
             <button
               type="button"
               onClick={handleSave}
@@ -484,7 +477,6 @@ export default function ProfileWizard() {
           </div>
         </div>
 
-        {/* Completion note on last step */}
         {step === TOTAL_STEPS - 1 && (
           <div className="mt-8 rounded-xl border border-[#c9a227]/20 bg-[#c9a227]/5 p-5 text-center">
             <p className="text-[#c9a227] text-xs font-bold uppercase tracking-[0.2em] mb-2">
