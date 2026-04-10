@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../lib/firebase/config";
 import { useAuth } from "../auth/AuthProvider";
@@ -20,6 +20,12 @@ export default function StepPersonalInfo({ data, onChange }: StepPersonalInfoPro
   const { user } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [photoUrl, setPhotoUrl] = useState<string | null>(data.facePhotoUrl || null);
+  useEffect(() => {
+    if (data.facePhotoUrl && !photoUrl) {
+      setPhotoUrl(data.facePhotoUrl);
+    }
+  }, [data.facePhotoUrl]);
+
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
 
