@@ -2,7 +2,7 @@
 
 import { useAuth } from "../components/auth/AuthProvider";
 import { signOut } from "../lib/firebase/auth";
-
+import FeaturedParksGrid from "../components/home/FeaturedParksGrid";
 const countyTiles = [
   { name: 'Lake County', parks: 12, units: 28, openParks: 4, status: 'available' },
   { name: 'Orange County', parks: 8, units: 11, openParks: 3, status: 'limited' },
@@ -12,15 +12,6 @@ const countyTiles = [
   { name: 'Brevard County', parks: 6, units: 9, openParks: 2, status: 'limited' },
   { name: 'Seminole County', parks: 4, units: 6, openParks: 1, status: 'limited' },
   { name: 'Osceola County', parks: 5, units: 13, openParks: 3, status: 'available' },
-];
-
-const availableParks = [
-  { name: 'Lake Griffin State Park', county: 'Lake County', types: 'Cabins, RV Sites', price: '$42â€“$118', left: 6 },
-  { name: 'Blue Spring State Park', county: 'Volusia County', types: 'Tent Sites, Cabins', price: '$28â€“$96', left: 4 },
-  { name: 'Wekiwa Springs State Park', county: 'Orange County', types: 'Tent Sites, RV Sites', price: '$24â€“$72', left: 3 },
-  { name: 'Silver Springs State Park', county: 'Marion County', types: 'Cabins, Full Hookup RV', price: '$36â€“$132', left: 8 },
-  { name: 'Moss Park', county: 'Orange County', types: 'Tent Sites, Primitive', price: '$22â€“$48', left: 5 },
-  { name: 'Kissimmee Prairie Preserve', county: 'Osceola County', types: 'Primitive, RV Sites', price: '$20â€“$64', left: 7 },
 ];
 
 const steps = [
@@ -199,22 +190,26 @@ export default function NationalTravelKeyHomePage() {
                     <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">9 NO VACANCY</span>
                   </div>
                   <div className="space-y-3">
-                    {availableParks.slice(0, 4).map((park) => (
-                      <div key={park.name} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                        <div className="flex items-start justify-between gap-4">
-                          <div>
-                            <p className="text-white font-bold text-sm">{park.name}</p>
-                            <p className="text-gray-400 text-xs mt-1">{park.county}</p>
-                            <p className="text-[#c9a227] text-xs mt-1">{park.types}</p>
-                          </div>
-                          <div className="text-right shrink-0">
-                            <p className="text-white font-black text-lg">{park.left} left</p>
-                            <p className="text-gray-400 text-xs">{park.price}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+  {[
+    { name: 'Trimble Park', county: 'Orange County', detail: 'Lakefront campground', status: 'Featured' },
+    { name: 'Kelly Park', county: 'Orange County', detail: 'Spring and day-use destination', status: 'Featured' },
+    { name: 'Live inventory expanding', county: 'NTK Database', detail: 'More parks can be seeded next', status: 'Connected' },
+    { name: 'Firestore is active', county: 'NTK Platform', detail: 'Homepage cards now support live data', status: 'Ready' },
+  ].map((park) => (
+    <div key={park.name} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-white font-bold text-sm">{park.name}</p>
+          <p className="text-gray-400 text-xs mt-1">{park.county}</p>
+          <p className="text-[#c9a227] text-xs mt-1">{park.detail}</p>
+        </div>
+        <div className="text-right shrink-0">
+          <p className="text-white font-black text-sm">{park.status}</p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
                   <div className="mt-5 rounded-2xl border border-[#c9a227]/20 bg-[#c9a227]/10 p-4">
                     <p className="text-[#c9a227] text-xs font-bold uppercase tracking-wide mb-1">National Travel Key</p>
                     <p className="text-gray-200 text-sm leading-relaxed">
@@ -301,42 +296,7 @@ export default function NationalTravelKeyHomePage() {
               Only parks with remaining inventory appear here. Once a park is fully booked it drops off this list immediately.
             </p>
           </div>
-          <div className="grid lg:grid-cols-2 gap-6">
-            {availableParks.map((park) => (
-              <div key={park.name} className="rounded-3xl border border-white/10 bg-[#08152b] p-6">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
-                  <div>
-                    <h3 className="text-2xl font-black text-white">{park.name}</h3>
-                    <p className="text-gray-400 text-sm mt-1">{park.county}</p>
-                  </div>
-                  <div className="text-left md:text-right">
-                    <p className="text-[#c9a227] text-3xl font-black">{park.left}</p>
-                    <p className="text-gray-400 text-xs uppercase tracking-wide">Units Left</p>
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-3 gap-4 mb-5">
-                  <div className="rounded-2xl bg-white/5 p-4">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">Available Types</p>
-                    <p className="text-white text-sm font-semibold">{park.types}</p>
-                  </div>
-                  <div className="rounded-2xl bg-white/5 p-4">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">Price Range</p>
-                    <p className="text-white text-sm font-semibold">{park.price}</p>
-                  </div>
-                  <div className="rounded-2xl bg-white/5 p-4">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">Status</p>
-                    <p className="text-emerald-300 text-sm font-semibold">Available</p>
-                  </div>
-                </div>
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center rounded-xl bg-[#c9a227] px-5 py-3 text-[#08152b] font-black text-sm hover:bg-[#d8b13a] transition"
-                >
-                  View Park Details
-                </a>
-              </div>
-            ))}
-          </div>
+          <FeaturedParksGrid />
         </div>
       </section>
 

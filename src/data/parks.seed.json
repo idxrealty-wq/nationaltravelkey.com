@@ -1,0 +1,144 @@
+[
+  {
+    "id": "trimble-park-orange-county",
+    "name": "Trimble Park",
+    "shortDescription": "Lakefront campground with RV and tent access in Orange County.",
+    "fullDescription": "Trimble Park gives travelers a lakefront base with camping access, boating appeal, and a simpler path to planning a stay.",
+    "parkType": "COUNTY_PARK",
+    "managedBy": "COUNTY",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "5802 Trimble Park Rd",
+      "city": "Mount Dora",
+      "county": "Orange",
+      "state": "FL",
+      "postalCode": "32757",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.8006,
+      "longitude": -81.6462,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": true,
+      "tentSites": true,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": false,
+      "fishing": true,
+      "playground": true,
+      "restrooms": true,
+      "showers": true,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": true,
+      "waterHookups": true,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "RESTRICTED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": true,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "kelly-park-orange-county",
+    "name": "Kelly Park",
+    "shortDescription": "Popular Orange County outdoor destination known for spring access and day-use recreation.",
+    "fullDescription": "Kelly Park is a high-interest destination where mobile-friendly discovery and registration flow matters because visitors often plan on the go.",
+    "parkType": "COUNTY_PARK",
+    "managedBy": "COUNTY",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "400 E Kelly Park Rd",
+      "city": "Apopka",
+      "county": "Orange",
+      "state": "FL",
+      "postalCode": "32712",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.7577,
+      "longitude": -81.5019,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": false,
+      "cabins": false,
+      "boatRamp": false,
+      "marina": false,
+      "swimming": true,
+      "fishing": false,
+      "playground": true,
+      "restrooms": true,
+      "showers": false,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "RESTRICTED",
+      "alcohol": "NOT_ALLOWED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": true,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  }
+]
