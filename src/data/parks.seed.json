@@ -140,5 +140,715 @@
     "isActive": true,
     "createdAt": "",
     "updatedAt": ""
+  },
+  {
+    "id": "moss-park-orange-county",
+    "name": "Moss Park",
+    "shortDescription": "Large Orange County park with camping, lake access, and day-use recreation.",
+    "fullDescription": "Moss Park gives travelers a broader outdoor option with camping and waterfront recreation, making it a strong fit for NTK's mobile-first discovery flow.",
+    "parkType": "COUNTY_PARK",
+    "managedBy": "COUNTY",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "12901 Moss Park Rd",
+      "city": "Orlando",
+      "county": "Orange",
+      "state": "FL",
+      "postalCode": "32832",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.4102,
+      "longitude": -81.1064,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": true,
+      "tentSites": true,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": true,
+      "fishing": true,
+      "playground": true,
+      "restrooms": true,
+      "showers": true,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": true,
+      "waterHookups": true,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "RESTRICTED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": true,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "lake-griffin-state-park-lake-county",
+    "name": "Lake Griffin State Park",
+    "shortDescription": "Lake County destination with boating, paddling, and old-Florida appeal.",
+    "fullDescription": "Lake Griffin State Park gives NTK a strong Lake County anchor with waterfront recreation, nature appeal, and a recognizable destination for travelers planning on mobile.",
+    "parkType": "STATE_PARK",
+    "managedBy": "STATE",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "3089 US-441",
+      "city": "Fruitland Park",
+      "county": "Lake",
+      "state": "FL",
+      "postalCode": "34731",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.8616,
+      "longitude": -81.9067,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": false,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": false,
+      "fishing": true,
+      "playground": false,
+      "restrooms": true,
+      "showers": false,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "ALLOWED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": true,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "blue-spring-state-park-volusia-county",
+    "name": "Blue Spring State Park",
+    "shortDescription": "Volusia County destination known for spring access, wildlife viewing, and paddling appeal.",
+    "fullDescription": "Blue Spring State Park adds a high-recognition Volusia destination to NTK and supports the kind of mobile-first planning travelers expect for popular Florida outdoor sites.",
+    "parkType": "STATE_PARK",
+    "managedBy": "STATE",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "2100 W French Ave",
+      "city": "Orange City",
+      "county": "Volusia",
+      "state": "FL",
+      "postalCode": "32763",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.9453,
+      "longitude": -81.3398,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": false,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": true,
+      "fishing": false,
+      "playground": false,
+      "restrooms": true,
+      "showers": false,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "RESTRICTED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": true,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "silver-springs-state-park-marion-county",
+    "name": "Silver Springs State Park",
+    "shortDescription": "Marion County destination with iconic springs, paddling, trails, and heritage appeal.",
+    "fullDescription": "Silver Springs State Park gives NTK a recognizable Marion County destination with strong traveler demand and a clear fit for mobile-first park discovery.",
+    "parkType": "STATE_PARK",
+    "managedBy": "STATE",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "5656 E Silver Springs Blvd",
+      "city": "Silver Springs",
+      "county": "Marion",
+      "state": "FL",
+      "postalCode": "34488",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 29.2108,
+      "longitude": -82.0565,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": true,
+      "cabins": true,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": false,
+      "fishing": false,
+      "playground": false,
+      "restrooms": true,
+      "showers": true,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "ALLOWED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": true,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "sylvan-lake-park-seminole-county",
+    "name": "Sylvan Lake Park",
+    "shortDescription": "Seminole County park with open space, recreation access, and family-friendly day use.",
+    "fullDescription": "Sylvan Lake Park helps NTK establish Seminole County coverage with a practical day-use destination that supports mobile discovery and future inventory expansion.",
+    "parkType": "COUNTY_PARK",
+    "managedBy": "COUNTY",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "845 Lake Markham Rd",
+      "city": "Sanford",
+      "county": "Seminole",
+      "state": "FL",
+      "postalCode": "32771",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.7894,
+      "longitude": -81.3224,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": false,
+      "cabins": false,
+      "boatRamp": false,
+      "marina": false,
+      "swimming": false,
+      "fishing": false,
+      "playground": true,
+      "restrooms": true,
+      "showers": false,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "ALLOWED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": false,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "lakefront-park-osceola-county",
+    "name": "Lakefront Park",
+    "shortDescription": "Kissimmee lakefront destination with trails, open space, and waterfront access.",
+    "fullDescription": "Lakefront Park gives NTK an Osceola County anchor with a recognizable waterfront setting and a strong use case for mobile-first discovery.",
+    "parkType": "CITY_PARK",
+    "managedBy": "CITY",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "201 Lakeview Dr",
+      "city": "Kissimmee",
+      "county": "Osceola",
+      "state": "FL",
+      "postalCode": "34741",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.2923,
+      "longitude": -81.4033,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": false,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": false,
+      "fishing": true,
+      "playground": true,
+      "restrooms": true,
+      "showers": false,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "ALLOWED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": false,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "fort-christmas-historical-park-orange-county",
+    "name": "Fort Christmas Historical Park",
+    "shortDescription": "Historic Orange County destination with open grounds, exhibits, and family-friendly exploration.",
+    "fullDescription": "Fort Christmas Historical Park gives NTK another recognizable Orange County destination and supports broader county coverage beyond camping-only inventory.",
+    "parkType": "COUNTY_PARK",
+    "managedBy": "COUNTY",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "1300 N Fort Christmas Rd",
+      "city": "Christmas",
+      "county": "Orange",
+      "state": "FL",
+      "postalCode": "32709",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.5636,
+      "longitude": -81.0179,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": false,
+      "cabins": false,
+      "boatRamp": false,
+      "marina": false,
+      "swimming": false,
+      "fishing": false,
+      "playground": true,
+      "restrooms": true,
+      "showers": false,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "ALLOWED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": false,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "wekiwa-springs-state-park-orange-county",
+    "name": "Wekiwa Springs State Park",
+    "shortDescription": "Popular spring destination with paddling, trails, and high mobile-planning demand.",
+    "fullDescription": "Wekiwa Springs State Park adds a major demand driver for NTK and reinforces the value of fast mobile discovery for high-interest Florida outdoor destinations.",
+    "parkType": "STATE_PARK",
+    "managedBy": "STATE",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "1800 Wekiwa Cir",
+      "city": "Apopka",
+      "county": "Orange",
+      "state": "FL",
+      "postalCode": "32712",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 28.7149,
+      "longitude": -81.4631,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": true,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": true,
+      "fishing": false,
+      "playground": false,
+      "restrooms": true,
+      "showers": true,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "RESTRICTED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": true,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "de-leon-springs-state-park-volusia-county",
+    "name": "De Leon Springs State Park",
+    "shortDescription": "Volusia County spring destination with swimming, paddling, and strong traveler recognition.",
+    "fullDescription": "De Leon Springs State Park strengthens NTK's Volusia County inventory with a recognizable destination that benefits from mobile-first planning and easier action paths.",
+    "parkType": "STATE_PARK",
+    "managedBy": "STATE",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "601 Ponce Deleon Blvd",
+      "city": "De Leon Springs",
+      "county": "Volusia",
+      "state": "FL",
+      "postalCode": "32130",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 29.1378,
+      "longitude": -81.3584,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": false,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": true,
+      "fishing": false,
+      "playground": true,
+      "restrooms": true,
+      "showers": false,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "RESTRICTED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": false,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": "juniper-springs-recreation-area-marion-county",
+    "name": "Juniper Springs Recreation Area",
+    "shortDescription": "Forest recreation destination with camping, paddling, and classic Florida outdoor appeal.",
+    "fullDescription": "Juniper Springs Recreation Area gives NTK a strong Marion County outdoor listing with camping relevance and a clear fit for mobile-first trip planning.",
+    "parkType": "NATIONAL_FOREST",
+    "managedBy": "FEDERAL",
+    "reservationSystem": "EXTERNAL_LINK",
+    "ntkRegistrationType": "EXTERNAL_CHECKOUT",
+    "dataSource": "MANUAL",
+    "address": {
+      "street1": "26701 E Hwy 40",
+      "city": "Silver Springs",
+      "county": "Marion",
+      "state": "FL",
+      "postalCode": "34488",
+      "country": "USA"
+    },
+    "coordinates": {
+      "latitude": 29.1806,
+      "longitude": -81.7107,
+      "geohash": ""
+    },
+    "contactInfo": {
+      "phone": "",
+      "email": "",
+      "websiteUrl": "",
+      "bookingUrl": ""
+    },
+    "amenityFlags": {
+      "rvSites": false,
+      "tentSites": true,
+      "cabins": false,
+      "boatRamp": true,
+      "marina": false,
+      "swimming": true,
+      "fishing": false,
+      "playground": false,
+      "restrooms": true,
+      "showers": true,
+      "laundry": false,
+      "fullHookups": false,
+      "electricHookups": false,
+      "waterHookups": false,
+      "sewerHookups": false,
+      "wifi": false,
+      "dumpStation": false,
+      "petArea": false
+    },
+    "policySummary": {
+      "pets": "RESTRICTED",
+      "alcohol": "RESTRICTED",
+      "quietHours": "",
+      "checkInTime": "",
+      "checkOutTime": "",
+      "maxOccupancyNote": ""
+    },
+    "availabilitySummary": {
+      "hasLiveInventory": false,
+      "inventoryLastCheckedAt": "",
+      "bookingWindowDays": 0,
+      "sameDayBookingAllowed": false
+    },
+    "featuredImageUrl": "",
+    "galleryImageUrls": [],
+    "isFeatured": false,
+    "isBookableThroughNtk": false,
+    "isActive": true,
+    "createdAt": "",
+    "updatedAt": ""
   }
 ]
