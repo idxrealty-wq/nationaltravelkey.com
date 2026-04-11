@@ -4,14 +4,14 @@ import { useAuth } from "../components/auth/AuthProvider";
 import { signOut } from "../lib/firebase/auth";
 import FeaturedParksGrid from "../components/home/FeaturedParksGrid";
 const countyTiles = [
-  { name: 'Lake County', parks: 12, units: 28, openParks: 4, status: 'available' },
-  { name: 'Orange County', parks: 8, units: 11, openParks: 3, status: 'limited' },
-  { name: 'Marion County', parks: 10, units: 19, openParks: 5, status: 'available' },
-  { name: 'Monroe County', parks: 7, units: 0, openParks: 0, status: 'full' },
-  { name: 'Volusia County', parks: 9, units: 14, openParks: 2, status: 'limited' },
-  { name: 'Brevard County', parks: 6, units: 9, openParks: 2, status: 'limited' },
-  { name: 'Seminole County', parks: 4, units: 6, openParks: 1, status: 'limited' },
-  { name: 'Osceola County', parks: 5, units: 13, openParks: 3, status: 'available' },
+  { name: 'Lake County', slug: 'lake', parks: 12, units: 28, openParks: 4, status: 'available' },
+  { name: 'Orange County', slug: 'orange', parks: 8, units: 11, openParks: 3, status: 'limited' },
+  { name: 'Marion County', slug: 'marion', parks: 10, units: 19, openParks: 5, status: 'available' },
+  { name: 'Monroe County', slug: 'monroe', parks: 7, units: 0, openParks: 0, status: 'full' },
+  { name: 'Volusia County', slug: 'volusia', parks: 9, units: 14, openParks: 2, status: 'limited' },
+  { name: 'Brevard County', slug: 'brevard', parks: 6, units: 9, openParks: 2, status: 'limited' },
+  { name: 'Seminole County', slug: 'seminole', parks: 4, units: 6, openParks: 1, status: 'limited' },
+  { name: 'Osceola County', slug: 'osceola', parks: 5, units: 13, openParks: 3, status: 'available' },
 ];
 
 const steps = [
@@ -255,7 +255,7 @@ export default function NationalTravelKeyHomePage() {
               return (
                 <a
                   key={county.name}
-                  href="#available-now"
+                  href={`/counties/${county.slug}`}
                   className={`rounded-3xl border \${status.border} \${status.bg} p-6 hover:-translate-y-1 transition block`}
                 >
                   <div className="flex items-center justify-between mb-5">

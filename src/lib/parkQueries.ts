@@ -93,3 +93,21 @@ export async function getParksByCounty(
   const snapshot = await getDocs(parksQuery);
   return snapshot.docs.map((docItem) => docItem.data() as NtkPark);
 }
+export async function getActiveParksByCounty(
+  db: Firestore,
+  county: string,
+  maxResults = 50
+): Promise<NtkPark[]> {
+  const normalizedCounty = county.trim();
+
+  const parksRef = collection(db, COLLECTION_NAME);
+  const parksQuery = query(
+    parksRef,
+    where('isActive', '==', true),
+    where('address.county', '==', normalizedCounty),
+    limit(maxResults)
+  );
+
+  const snapshot = await getDocs(parksQuery);
+  return snapshot.docs.map((docItem) => docItem.data() as NtkPark);
+}
